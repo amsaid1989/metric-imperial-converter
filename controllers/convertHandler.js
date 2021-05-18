@@ -1,4 +1,4 @@
-const processor = require("./inputProcessor");
+const parser = require("./inputParser");
 
 function ConvertHandler() {
     this.getNum = function (input) {
@@ -18,7 +18,7 @@ function ConvertHandler() {
 
         const cleanInput = input.split(splitRegex).join("");
 
-        if (!processor.validQuantity(cleanInput)) {
+        if (!parser.validQuantity(cleanInput)) {
             return "invalid number";
         }
 
@@ -80,6 +80,10 @@ function ConvertHandler() {
     };
 
     this.convert = function (initNum, initUnit) {
+        // Returns null if the initNum or initUnit are invalid. Otherwise,
+        // it returns the converted value using a lookup table that includes
+        // the conversion functions for each unit
+
         const galToL = 3.78541;
         const lbsToKg = 0.453592;
         const miToKm = 1.60934;
@@ -93,13 +97,27 @@ function ConvertHandler() {
             km: (num) => num / miToKm,
         };
 
-        return conversionTable[initUnit](initNum).toFixed(5);
+        if (initNum === "invalid input" || initUnit === "invalid unit") {
+            return null;
+        }
+
+        return Number(conversionTable[initUnit](initNum).toFixed(5));
     };
 
     this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-        let result;
+        // Returns null if the initNum or initUnit are invalid. Otherwise,
+        // it returns the string that will be displayed to the user
 
-        return result;
+        if (initNum === "invalid input" || initUnit === "invalid unit") {
+            return null;
+        }
+
+        const spelledInitUnit = this.spellOutUnit(initUnit);
+        const spelledReturnUnit = this.spellOutUnit(returnUnit);
+
+        return `${initNum} ${spelledInitUnit} converts to ${returnNum.toFixed(
+            5
+        )} ${spelledReturnUnit}`;
     };
 }
 

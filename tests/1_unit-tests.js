@@ -96,27 +96,27 @@ suite("Unit Tests", function () {
         assert.isUndefined(convertHandler.spellOutUnit("564jhgg"));
     });
     test("convertHandler should correctly convert gal to L", function () {
-        assert.equal(convertHandler.convert(5.5, "gal"), "20.81976");
-        assert.equal(convertHandler.convert(20, "gal"), "75.70820");
+        assert.equal(convertHandler.convert(5.5, "gal"), 20.81976);
+        assert.equal(convertHandler.convert(20, "gal"), 75.7082);
     });
     test("convertHandler should correctly convert L to gal", function () {
-        assert.equal(convertHandler.convert(10, "L"), "2.64172");
-        assert.equal(convertHandler.convert(25.25, "L"), "6.67035");
+        assert.equal(convertHandler.convert(10, "L"), 2.64172);
+        assert.equal(convertHandler.convert(25.25, "L"), 6.67035);
     });
     test("convertHandler should correctly convert mi to km", function () {
-        assert.equal(convertHandler.convert(120, "mi"), "193.12080");
-        assert.equal(convertHandler.convert(75.5, "mi"), "121.50517");
+        assert.equal(convertHandler.convert(120, "mi"), 193.1208);
+        assert.equal(convertHandler.convert(75.5, "mi"), 121.50517);
     });
     test("convertHandler should correctly convert km to mi", function () {
-        assert.equal(convertHandler.convert(90, "km"), "55.92355");
-        assert.equal(convertHandler.convert(135.5, "km"), "84.19601");
+        assert.equal(convertHandler.convert(90, "km"), 55.92355);
+        assert.equal(convertHandler.convert(135.5, "km"), 84.19601);
     });
     test("convertHandler should correctly convert lbs to kg", function () {
-        assert.equal(convertHandler.convert(100, "lbs"), "45.35920");
-        assert.equal(convertHandler.convert(55.5, "lbs"), "25.17436");
+        assert.equal(convertHandler.convert(100, "lbs"), 45.3592);
+        assert.equal(convertHandler.convert(55.5, "lbs"), 25.17436);
     });
     test("convertHandler should correctly convert kg to lbs", function () {
-        assert.equal(convertHandler.convert(60.75, "kg"), "133.93093");
-        assert.equal(convertHandler.convert(120, "kg"), "264.55493");
+        assert.equal(convertHandler.convert(60.75, "kg"), 133.93093);
+        assert.equal(convertHandler.convert(120, "kg"), 264.55493);
     });
 });
