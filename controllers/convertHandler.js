@@ -32,30 +32,68 @@ function ConvertHandler() {
     };
 
     this.getUnit = function (input) {
-        let result;
+        const units = ["kg", "lbs", "km", "mi", "gal", "l"];
 
-        return result;
+        // regex to check for any alphabets at the end of the input
+        // that might constitute a unit
+        const matchPattern = /[^0-9\.\/]*$/g;
+
+        const unit = input
+            .match(matchPattern)
+            .filter((elem) => elem !== "")
+            .join("")
+            .toLowerCase();
+
+        if (units.indexOf(unit) !== -1) {
+            // If the unit is litres we only return it in the uppercase
+            // format to make it more readable
+            return unit === "l" ? "L" : unit;
+        }
+
+        return "invalid unit";
     };
 
     this.getReturnUnit = function (initUnit) {
-        let result;
+        const unitLookup = {
+            km: "mi",
+            mi: "km",
+            kg: "lbs",
+            lbs: "kg",
+            L: "gal",
+            gal: "L",
+        };
 
-        return result;
+        return unitLookup[initUnit];
     };
 
     this.spellOutUnit = function (unit) {
-        let result;
+        const unitLookup = {
+            km: "kilometers",
+            mi: "miles",
+            kg: "kilograms",
+            lbs: "pounds",
+            L: "liters",
+            gal: "gallons",
+        };
 
-        return result;
+        return unitLookup[unit];
     };
 
     this.convert = function (initNum, initUnit) {
         const galToL = 3.78541;
         const lbsToKg = 0.453592;
         const miToKm = 1.60934;
-        let result;
 
-        return result;
+        const conversionTable = {
+            gal: (num) => num * galToL,
+            L: (num) => num / galToL,
+            lbs: (num) => num * lbsToKg,
+            kg: (num) => num / lbsToKg,
+            mi: (num) => num * miToKm,
+            km: (num) => num / miToKm,
+        };
+
+        return conversionTable[initUnit](initNum).toFixed(5);
     };
 
     this.getString = function (initNum, initUnit, returnNum, returnUnit) {
